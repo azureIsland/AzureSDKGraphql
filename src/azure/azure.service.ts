@@ -17,7 +17,7 @@ export class AzureService {
     const parameter: VirtualNetwork = {
       location: createVNet.location,
       addressSpace: {
-        addressPrefixes: ['10.50.0.0/16'],
+        addressPrefixes: [createVNet.addresses],
       },
     };
 
@@ -27,7 +27,6 @@ export class AzureService {
         createVNet.networkName,
         parameter,
       );
-    console.log('========================');
     console.log(virtualNetworks_create_info);
     return virtualNetworks_create_info;
   }

@@ -31,7 +31,7 @@ export class CreateVNetInput {
   @IsNotEmpty()
   networkName: string;
 
-  // @Field()
-  // @IsNotEmpty()
-  // addresses: string[];
+  @Field()
+  @IsNotEmpty()
+  addresses: string;
 }
