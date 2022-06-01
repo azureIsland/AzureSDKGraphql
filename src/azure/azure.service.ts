@@ -2,9 +2,28 @@ import { Injectable } from '@nestjs/common';
 import { NetworkManagementClient, VirtualNetwork } from '@azure/arm-network';
 import { CreateVNetInput } from './dto/input/create-vnet.intput';
 import { ClientSecretCredential } from '@azure/identity';
+import { GetVNetListsArgs } from './dto/args/get-vnetLists.args';
 
 @Injectable()
 export class AzureService {
+  async listsVNet(getVNetListsArgs: GetVNetListsArgs) {
+    const network_client = new NetworkManagementClient(
+      new ClientSecretCredential(
+        getVNetListsArgs.tenantId,
+        getVNetListsArgs.clientId,
+        getVNetListsArgs.clientSecret,
+      ),
+      getVNetListsArgs.subscriptionId,
+    );
+    const virtualNetworksLists = network_client.virtualNetworks.listAll();
+    const networks: VirtualNetwork[] = [];
+    for await (const item of virtualNetworksLists) {
+      networks.push(item);
+    }
+    console.log(networks);
+    return networks;
+  }
+
   async createVNet(createVNet: CreateVNetInput) {
     const network_client = new NetworkManagementClient(
       new ClientSecretCredential(
