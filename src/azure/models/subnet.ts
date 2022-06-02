@@ -1,7 +1,8 @@
+import { Subnet } from '@azure/arm-network';
 import { ObjectType, Field } from '@nestjs/graphql';
 
 @ObjectType()
-export class SubNet {
+export class SubNet implements Subnet {
   @Field()
   id: string;
 
@@ -16,9 +17,6 @@ export class SubNet {
 
   @Field()
   addressPrefix: string;
-
-  @Field(() => [String])
-  delegations: string[];
 
   @Field()
   provisioningState: string;

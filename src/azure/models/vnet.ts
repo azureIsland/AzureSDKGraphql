@@ -1,8 +1,9 @@
+import { Subnet, VirtualNetwork } from '@azure/arm-network';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { SubNet } from './subnet';
 
 @ObjectType()
-export class VNet {
+export class VNet implements VirtualNetwork {
   @Field()
   id: string;
 
@@ -15,17 +16,14 @@ export class VNet {
   @Field()
   location: string;
 
-  @Field(() => [String])
-  tags: string[];
+  @Field(() => String)
+  tags: { [propertyName: string]: string };
 
   @Field()
   etag: string;
 
   @Field(() => [SubNet])
-  subnets: SubNet[];
-
-  @Field(() => [String])
-  virtualNetworkPeerings: string[];
+  subnets?: Subnet[];
 
   @Field()
   resourceGuid: string;
