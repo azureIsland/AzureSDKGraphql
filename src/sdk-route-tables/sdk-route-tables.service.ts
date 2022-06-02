@@ -30,7 +30,7 @@ export class SdkRouteTablesService {
     //   }
     // ]
 
-    const RouteTable =
+    const routeTable =
       await networkClient.routeTables.beginCreateOrUpdateAndWait(
         createRouteTablesInput.resourceGroup,
         createRouteTablesInput.routeTableName,
@@ -41,6 +41,6 @@ export class SdkRouteTablesService {
           routes,
         },
       );
-    return RouteTable;
+    return routeTable;
   }
 }
