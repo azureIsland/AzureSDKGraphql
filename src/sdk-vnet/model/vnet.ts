@@ -1,6 +1,6 @@
 import { Subnet, VirtualNetwork } from '@azure/arm-network';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { SubNet } from './subnet';
+import { SubNet } from 'src/sdk-subnet/model/subnet';
 
 @ObjectType()
 export class VNet implements VirtualNetwork {

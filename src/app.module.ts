@@ -3,7 +3,9 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AzureModule } from './azure/azure.module';
+import { SdkVNetModule } from './sdk-vnet/sdk-vnet.module';
+import { SdkSubnetModule } from './sdk-subnet/sdk-subnet.module';
+import { SdkNetworkSecurityGroupModule } from './sdk-network-security-group/sdk-network-security-group.module';
 
 @Module({
   imports: [
@@ -11,7 +13,9 @@ import { AzureModule } from './azure/azure.module';
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),
-    AzureModule,
+    SdkVNetModule,
+    SdkSubnetModule,
+    SdkNetworkSecurityGroupModule,
   ],
   controllers: [AppController],
   providers: [AppService],
