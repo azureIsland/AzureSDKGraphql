@@ -9,7 +9,7 @@ export class SdkNetworkSecurityGroupResolver {
     private readonly sdkNetworkSecurityGroup: SdkNetworkSecurityGroupService,
   ) {}
 
-  @Mutation(() => Test, { nullable: true })
+  @Mutation(() => Test)
   async createNetworkSecurityGroup(
     @Args('createNSG') createNSGInput: CreateNetworkSecurityGroupInput,
   ) {
