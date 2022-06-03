@@ -6,6 +6,23 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
+}
+
+model secret{
+  /// @Field(type => Int)
+  id Int @id @default(autoincrement())
+  /// @IsNotEmpty()
+  ///@IsString()
+  tenantId String
+  /// @IsNotEmpty()
+  ///@IsString()
+  clientId String
+  /// @IsNotEmpty()
+  ///@IsString()
+  clientSecret String
+  /// @IsNotEmpty()
+  ///@IsString()
+  subscriptionId String
 }
