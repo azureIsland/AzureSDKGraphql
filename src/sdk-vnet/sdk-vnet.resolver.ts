@@ -8,7 +8,7 @@ import { SdkVNetService } from './sdk-vnet.service';
 export class SdkVNetResolver {
   constructor(private readonly sdkVNetService: SdkVNetService) {}
 
-  @Query(() => [VNet], { name: 'VNets', nullable: true })
+  @Query(() => [VNet], { name: 'findAllVNets', nullable: true })
   async listsVNets(@Args() getVNetListsArgs: GetVNetListsArgs) {
     return this.sdkVNetService.listsVNet(getVNetListsArgs);
   }

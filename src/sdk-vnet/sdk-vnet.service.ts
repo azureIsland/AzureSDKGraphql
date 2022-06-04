@@ -1,20 +1,27 @@
 import { NetworkManagementClient, VirtualNetwork } from '@azure/arm-network';
 import { ClientSecretCredential } from '@azure/identity';
 import { Injectable } from '@nestjs/common';
+import { SdkSecretService } from 'src/sdk-secret/sdk-secret.service';
 import { GetVNetListsArgs } from './dto/args/get-vnetLists.args';
 import { CreateVNetInput } from './dto/input/create-vnet.intput';
 
 @Injectable()
 export class SdkVNetService {
+  constructor(private readonly sdkSecretService: SdkSecretService) {}
+
   // VNet全取得
   async listsVNet(getVNetListsArgs: GetVNetListsArgs) {
+    const secret = await this.sdkSecretService.findFirst({
+      where: { id: { equals: getVNetListsArgs.id } },
+    });
+
     const network_client = new NetworkManagementClient(
       new ClientSecretCredential(
-        getVNetListsArgs.tenantId,
-        getVNetListsArgs.clientId,
-        getVNetListsArgs.clientSecret,
+        secret.tenantId,
+        secret.clientId,
+        secret.clientSecret,
       ),
-      getVNetListsArgs.subscriptionId,
+      secret.subscriptionId,
     );
     const virtualNetworksLists = network_client.virtualNetworks.listAll();
     const networks: VirtualNetwork[] = [];
@@ -27,13 +34,17 @@ export class SdkVNetService {
 
   // VNet作成
   async createVNet(createVNet: CreateVNetInput) {
+    const secret = await this.sdkSecretService.findFirst({
+      where: { id: { equals: createVNet.id } },
+    });
+
     const network_client = new NetworkManagementClient(
       new ClientSecretCredential(
-        createVNet.tenantId,
-        createVNet.clientId,
-        createVNet.clientSecret,
+        secret.tenantId,
+        secret.clientId,
+        secret.clientSecret,
       ),
-      createVNet.subscriptionId,
+      secret.subscriptionId,
     );
     const parameter: VirtualNetwork = {
       location: createVNet.location,

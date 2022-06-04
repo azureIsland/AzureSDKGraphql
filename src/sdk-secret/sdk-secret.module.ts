@@ -5,5 +5,6 @@ import { PrismaService } from 'src/prisma.service';
 
 @Module({
   providers: [SdkSecretService, SdkSecretResolver, PrismaService],
+  exports: [SdkSecretService],
 })
 export class SdkSecretModule {}
