@@ -1,19 +1,30 @@
 import { NetworkManagementClient, Route, Subnet } from '@azure/arm-network';
 import { ClientSecretCredential } from '@azure/identity';
 import { Injectable } from '@nestjs/common';
+import { SdkSecretService } from 'src/sdk-secret/sdk-secret.service';
 import { CreateRouteTablesInput } from './dto/input/create-routeTables.input';
 
 @Injectable()
 export class SdkRouteTablesService {
+  constructor(private readonly sdkSecretService: SdkSecretService) {}
+
   // ルートテーブルの作成・更新
   async createRouteTables(createRouteTablesInput: CreateRouteTablesInput) {
+    const secret = await this.sdkSecretService.findFirst({
+      where: {
+        id: {
+          equals: createRouteTablesInput.id,
+        },
+      },
+    });
+
     const networkClient = new NetworkManagementClient(
       new ClientSecretCredential(
-        createRouteTablesInput.tenantId,
-        createRouteTablesInput.clientId,
-        createRouteTablesInput.clientSecret,
+        secret.tenantId,
+        secret.clientId,
+        secret.clientSecret,
       ),
-      createRouteTablesInput.subscriptionId,
+      secret.subscriptionId,
     );
 
     const routes: Route[] = [
@@ -32,10 +43,10 @@ export class SdkRouteTablesService {
 
     const routeTable =
       await networkClient.routeTables.beginCreateOrUpdateAndWait(
-        createRouteTablesInput.resourceGroup,
+        secret.resourceGroup,
         createRouteTablesInput.routeTableName,
         {
-          location: createRouteTablesInput.location,
+          location: secret.location,
           disableBgpRoutePropagation:
             !createRouteTablesInput.IsConnectDefaultGateway,
           routes,

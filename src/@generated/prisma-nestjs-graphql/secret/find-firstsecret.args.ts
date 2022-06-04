@@ -9,23 +9,22 @@ import { SecretScalarFieldEnum } from '../prisma/secret-scalar-field.enum';
 
 @ArgsType()
 export class FindFirstsecretArgs {
+  @Field(() => secretWhereInput, { nullable: true })
+  @Type(() => secretWhereInput)
+  where?: secretWhereInput;
 
-    @Field(() => secretWhereInput, {nullable:true})
-    @Type(() => secretWhereInput)
-    where?: secretWhereInput;
+  @Field(() => [secretOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<secretOrderByWithRelationInput>;
 
-    @Field(() => [secretOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<secretOrderByWithRelationInput>;
+  @Field(() => secretWhereUniqueInput, { nullable: true })
+  cursor?: secretWhereUniqueInput;
 
-    @Field(() => secretWhereUniqueInput, {nullable:true})
-    cursor?: secretWhereUniqueInput;
+  @Field(() => Int, { nullable: true })
+  take?: number;
 
-    @Field(() => Int, {nullable:true})
-    take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
 
-    @Field(() => Int, {nullable:true})
-    skip?: number;
-
-    @Field(() => [SecretScalarFieldEnum], {nullable:true})
-    distinct?: Array<keyof typeof SecretScalarFieldEnum>;
+  @Field(() => [SecretScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof SecretScalarFieldEnum>;
 }

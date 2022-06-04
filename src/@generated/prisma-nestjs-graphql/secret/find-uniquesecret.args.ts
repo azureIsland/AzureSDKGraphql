@@ -5,8 +5,7 @@ import { Type } from 'class-transformer';
 
 @ArgsType()
 export class FindUniquesecretArgs {
-
-    @Field(() => secretWhereUniqueInput, {nullable:false})
-    @Type(() => secretWhereUniqueInput)
-    where!: secretWhereUniqueInput;
+  @Field(() => secretWhereUniqueInput, { nullable: false })
+  @Type(() => secretWhereUniqueInput)
+  where!: secretWhereUniqueInput;
 }

@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { SdkSubnetService } from './sdk-subnet.service';
 import { SdkSubnetResolver } from './sdk-subnet.resolver';
+import { SdkSecretModule } from 'src/sdk-secret/sdk-secret.module';
 
 @Module({
+  imports: [SdkSecretModule],
   providers: [SdkSubnetService, SdkSubnetResolver],
   exports: [SdkSubnetService],
 })

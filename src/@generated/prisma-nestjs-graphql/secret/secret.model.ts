@@ -4,25 +4,24 @@ import { ID } from '@nestjs/graphql';
 
 @ObjectType()
 export class secret {
+  @Field(() => ID, { nullable: false })
+  id!: number;
 
-    @Field(() => ID, {nullable:false})
-    id!: number;
+  @Field(() => String, { nullable: false })
+  tenantId!: string;
 
-    @Field(() => String, {nullable:false})
-    tenantId!: string;
+  @Field(() => String, { nullable: false })
+  clientId!: string;
 
-    @Field(() => String, {nullable:false})
-    clientId!: string;
+  @Field(() => String, { nullable: false })
+  clientSecret!: string;
 
-    @Field(() => String, {nullable:false})
-    clientSecret!: string;
+  @Field(() => String, { nullable: false })
+  subscriptionId!: string;
 
-    @Field(() => String, {nullable:false})
-    subscriptionId!: string;
+  @Field(() => String, { nullable: false })
+  resourceGroup!: string;
 
-    @Field(() => String, {nullable:false})
-    resourceGroup!: string;
-
-    @Field(() => String, {nullable:false})
-    location!: string;
+  @Field(() => String, { nullable: false })
+  location!: string;
 }
