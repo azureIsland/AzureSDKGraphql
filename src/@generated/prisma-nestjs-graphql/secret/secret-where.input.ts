@@ -5,28 +5,27 @@ import { StringFilter } from '../prisma/string-filter.input';
 
 @InputType()
 export class secretWhereInput {
+  @Field(() => [secretWhereInput], { nullable: true })
+  AND?: Array<secretWhereInput>;
 
-    @Field(() => [secretWhereInput], {nullable:true})
-    AND?: Array<secretWhereInput>;
+  @Field(() => [secretWhereInput], { nullable: true })
+  OR?: Array<secretWhereInput>;
 
-    @Field(() => [secretWhereInput], {nullable:true})
-    OR?: Array<secretWhereInput>;
+  @Field(() => [secretWhereInput], { nullable: true })
+  NOT?: Array<secretWhereInput>;
 
-    @Field(() => [secretWhereInput], {nullable:true})
-    NOT?: Array<secretWhereInput>;
+  @Field(() => IntFilter, { nullable: true })
+  id?: IntFilter;
 
-    @Field(() => IntFilter, {nullable:true})
-    id?: IntFilter;
+  @Field(() => StringFilter, { nullable: true })
+  tenantId?: StringFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    tenantId?: StringFilter;
+  @Field(() => StringFilter, { nullable: true })
+  clientId?: StringFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    clientId?: StringFilter;
+  @Field(() => StringFilter, { nullable: true })
+  clientSecret?: StringFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    clientSecret?: StringFilter;
-
-    @Field(() => StringFilter, {nullable:true})
-    subscriptionId?: StringFilter;
+  @Field(() => StringFilter, { nullable: true })
+  subscriptionId?: StringFilter;
 }
