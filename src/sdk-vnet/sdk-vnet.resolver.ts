@@ -8,13 +8,13 @@ import { SdkVNetService } from './sdk-vnet.service';
 export class SdkVNetResolver {
   constructor(private readonly sdkVNetService: SdkVNetService) {}
 
-  @Query(() => [VNet], { name: 'VNets', nullable: true })
-  async listsVNets(@Args() getVNetListsArgs: GetVNetListsArgs) {
-    return this.sdkVNetService.listsVNet(getVNetListsArgs);
+  @Query(() => [VNet], { name: 'findAllVNets', nullable: true })
+  async listsVNets(@Args() args: GetVNetListsArgs) {
+    return this.sdkVNetService.listsVNet(args);
   }
 
   @Mutation(() => VNet)
-  async createVNet(@Args('createVNet') createVNet: CreateVNetInput) {
-    return this.sdkVNetService.createVNet(createVNet);
+  async createVNet(@Args('createVNet') args: CreateVNetInput) {
+    return this.sdkVNetService.createVNet(args);
   }
 }

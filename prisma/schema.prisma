@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator nestgraphql {
+   provider = "node node_modules/prisma-nestjs-graphql"
+   output = "../src/@generated/prisma-nestjs-graphql"
+   fields_Validator_from = "class-validator"
+   fields_Validator_input = true
+   decorate_1_type        = "CreateOne*Args"
+   decorate_1_field       = data
+   decorate_1_name        = ValidateNested
+   decorate_1_from        = "class-validator"
+   decorate_1_arguments   = "[]"
+   decorate_2_type        = "CreateOne*Args"
+   decorate_2_field       = data
+   decorate_2_from        = "class-transformer"
+   decorate_2_arguments   = "['() => {propertyType.0}']"
+   decorate_2_name        = Type
+ }
+
+model secret {
+  /// @Field(type => Int)
+  id             Int    @id @default(autoincrement())
+  /// @IsNotEmpty()
+  /// @IsString()
+  tenantId       String
+  /// @IsNotEmpty()
+  /// @IsString()
+  clientId       String
+  /// @IsNotEmpty()
+  /// @IsString()
+  clientSecret   String
+  /// @IsNotEmpty()
+  /// @IsString()
+  subscriptionId String
+  /// @IsNotEmpty()
+  /// @IsString()
+  resourceGroup String
+  /// @IsNotEmpty()
+  /// @IsString()
+  location String
+}

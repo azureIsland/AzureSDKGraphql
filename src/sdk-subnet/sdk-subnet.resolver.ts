@@ -8,9 +8,7 @@ export class SdkSubnetResolver {
   constructor(private readonly sdkSubNetService: SdkSubnetService) {}
 
   @Mutation(() => Test)
-  async createSubnet(
-    @Args('createSubnet') createSubnetInput: CreateSubnetInput,
-  ) {
-    return this.sdkSubNetService.createSubnet(createSubnetInput);
+  async createSubnet(@Args('createSubnet') args: CreateSubnetInput) {
+    return this.sdkSubNetService.createSubnet(args);
   }
 }

@@ -9,8 +9,8 @@ export class SdkRouteTablesResolver {
 
   @Mutation(() => SDKStatus)
   async createRouteTables(
-    @Args('createRouteTable') createRouteTable: CreateRouteTablesInput,
+    @Args('createRouteTable') args: CreateRouteTablesInput,
   ) {
-    return this.sdkRouteTablesService.createRouteTables(createRouteTable);
+    return this.sdkRouteTablesService.createRouteTables(args);
   }
 }

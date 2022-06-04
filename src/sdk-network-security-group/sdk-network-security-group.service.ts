@@ -1,21 +1,32 @@
 import { NetworkManagementClient } from '@azure/arm-network';
 import { ClientSecretCredential } from '@azure/identity';
 import { Injectable } from '@nestjs/common';
+import { SdkSecretService } from 'src/sdk-secret/sdk-secret.service';
 import { GetNetworkSecurityGroupArgs } from './dto/args/get-networkSecurityGroup.args';
 import { CreateNetworkSecurityGroupInput } from './dto/input/create-networkSecurityGroup.input';
 
 @Injectable()
 export class SdkNetworkSecurityGroupService {
+  constructor(private readonly sdkSecretService: SdkSecretService) {}
+
   async listsNetworkSecurityGroup(
     getNetworkSecurityGroupArgs: GetNetworkSecurityGroupArgs,
   ) {
+    const secret = await this.sdkSecretService.findFirst({
+      where: {
+        id: {
+          equals: getNetworkSecurityGroupArgs.id,
+        },
+      },
+    });
+
     const network_client = new NetworkManagementClient(
       new ClientSecretCredential(
-        getNetworkSecurityGroupArgs.tenantId,
-        getNetworkSecurityGroupArgs.clientId,
-        getNetworkSecurityGroupArgs.clientSecret,
+        secret.tenantId,
+        secret.clientId,
+        secret.clientSecret,
       ),
-      getNetworkSecurityGroupArgs.subscriptionId,
+      secret.subscriptionId,
     );
 
     const securityGroups = network_client.networkSecurityGroups.listAll();
@@ -28,21 +39,29 @@ export class SdkNetworkSecurityGroupService {
   async createNetworkSecurityGroup(
     createNSGInput: CreateNetworkSecurityGroupInput,
   ) {
+    const secret = await this.sdkSecretService.findFirst({
+      where: {
+        id: {
+          equals: createNSGInput.id,
+        },
+      },
+    });
+
     const network_client = new NetworkManagementClient(
       new ClientSecretCredential(
-        createNSGInput.tenantId,
-        createNSGInput.clientId,
-        createNSGInput.clientSecret,
+        secret.tenantId,
+        secret.clientId,
+        secret.clientSecret,
       ),
-      createNSGInput.subscriptionId,
+      secret.subscriptionId,
     );
 
     const newSecurityGroup =
       await network_client.networkSecurityGroups.beginCreateOrUpdateAndWait(
-        createNSGInput.resourceGroup,
+        secret.resourceGroup,
         createNSGInput.networkSecurityGroupName,
         {
-          location: createNSGInput.location,
+          location: secret.location,
           securityRules: [
             {
               name: 'AllowVNetInBound',
