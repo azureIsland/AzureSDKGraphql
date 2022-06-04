@@ -47,7 +47,7 @@ export class SdkVNetService {
       secret.subscriptionId,
     );
     const parameter: VirtualNetwork = {
-      location: createVNet.location,
+      location: secret.location,
       addressSpace: {
         addressPrefixes: [createVNet.addresses],
       },
@@ -55,7 +55,7 @@ export class SdkVNetService {
 
     const virtualNetworks_create_info =
       await network_client.virtualNetworks.beginCreateOrUpdateAndWait(
-        createVNet.resourceGroup,
+        secret.resourceGroup,
         createVNet.networkName,
         parameter,
       );

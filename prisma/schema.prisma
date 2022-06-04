@@ -39,4 +39,10 @@ model secret {
   /// @IsNotEmpty()
   /// @IsString()
   subscriptionId String
+  /// @IsNotEmpty()
+  /// @IsString()
+  resourceGroup String
+  /// @IsNotEmpty()
+  /// @IsString()
+  location String
 }

@@ -9,14 +9,6 @@ export class CreateVNetInput {
 
   @Field()
   @IsNotEmpty()
-  resourceGroup: string;
-
-  @Field()
-  @IsNotEmpty()
-  location: string;
-
-  @Field()
-  @IsNotEmpty()
   networkName: string;
 
   @Field()

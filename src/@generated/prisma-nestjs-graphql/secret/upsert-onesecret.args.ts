@@ -7,15 +7,16 @@ import { secretUpdateInput } from './secret-update.input';
 
 @ArgsType()
 export class UpsertOnesecretArgs {
-  @Field(() => secretWhereUniqueInput, { nullable: false })
-  @Type(() => secretWhereUniqueInput)
-  where!: secretWhereUniqueInput;
 
-  @Field(() => secretCreateInput, { nullable: false })
-  @Type(() => secretCreateInput)
-  create!: secretCreateInput;
+    @Field(() => secretWhereUniqueInput, {nullable:false})
+    @Type(() => secretWhereUniqueInput)
+    where!: secretWhereUniqueInput;
 
-  @Field(() => secretUpdateInput, { nullable: false })
-  @Type(() => secretUpdateInput)
-  update!: secretUpdateInput;
+    @Field(() => secretCreateInput, {nullable:false})
+    @Type(() => secretCreateInput)
+    create!: secretCreateInput;
+
+    @Field(() => secretUpdateInput, {nullable:false})
+    @Type(() => secretUpdateInput)
+    update!: secretUpdateInput;
 }

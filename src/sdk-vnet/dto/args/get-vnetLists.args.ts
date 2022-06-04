@@ -6,12 +6,4 @@ export class GetVNetListsArgs {
   @Field()
   @IsNotEmpty()
   id: number;
-
-  @Field()
-  @IsNotEmpty()
-  resourceGroup: string;
-
-  @Field()
-  @IsNotEmpty()
-  location: string;
 }
