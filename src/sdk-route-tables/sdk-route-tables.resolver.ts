@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { GetRouteTablesListsAllArgs } from './dto/args/get-routeTablesAll.args';
+import { GetRouteTablesAllArgs } from './dto/args/get-routeTablesAll.args';
 import { GetRouteTablesFindOneArgs } from './dto/args/get-routeTablesFindOne.args';
 import { CreateRouteTablesInput } from './dto/input/create-routeTables.input';
 import { CreatedRouteTable } from './model/createdRouteTable';
@@ -11,7 +11,7 @@ export class SdkRouteTablesResolver {
   constructor(private readonly sdkRouteTablesService: SdkRouteTablesService) {}
 
   @Query(() => [RouteTable], { name: 'findAllRouteTables' })
-  async getRouteTablesAll(@Args() args: GetRouteTablesListsAllArgs) {
+  async getRouteTablesAll(@Args() args: GetRouteTablesAllArgs) {
     return this.sdkRouteTablesService.getRouteTablesAll(args);
   }
 

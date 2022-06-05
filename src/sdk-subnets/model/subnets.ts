@@ -2,7 +2,7 @@ import { Subnet } from '@azure/arm-network';
 import { ObjectType, Field } from '@nestjs/graphql';
 
 @ObjectType()
-export class SubNet implements Subnet {
+export class SubNets implements Subnet {
   @Field()
   id: string;
 

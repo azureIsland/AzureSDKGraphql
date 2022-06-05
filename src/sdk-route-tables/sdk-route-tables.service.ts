@@ -2,7 +2,7 @@ import { NetworkManagementClient, Route, RouteTable } from '@azure/arm-network';
 import { ClientSecretCredential } from '@azure/identity';
 import { Injectable } from '@nestjs/common';
 import { SdkSecretService } from 'src/sdk-secret/sdk-secret.service';
-import { GetRouteTablesListsAllArgs } from './dto/args/get-routeTablesAll.args';
+import { GetRouteTablesAllArgs } from './dto/args/get-routeTablesAll.args';
 import { GetRouteTablesFindOneArgs } from './dto/args/get-routeTablesFindOne.args';
 import { CreateRouteTablesInput } from './dto/input/create-routeTables.input';
 
@@ -11,7 +11,7 @@ export class SdkRouteTablesService {
   constructor(private readonly sdkSecretService: SdkSecretService) {}
 
   // ルートテーブル全取得
-  async getRouteTablesAll(args: GetRouteTablesListsAllArgs) {
+  async getRouteTablesAll(args: GetRouteTablesAllArgs) {
     const secret = await this.sdkSecretService.findFirst({
       where: { id: { equals: args.id } },
     });

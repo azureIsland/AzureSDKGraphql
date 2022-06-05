@@ -1,8 +1,8 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { ArgsType, Field } from '@nestjs/graphql';
 import { IsNotEmpty } from 'class-validator';
 
-@InputType()
-export class CreateSubnetInput {
+@ArgsType()
+export class GetSubnetFindOneArgs {
   @Field()
   @IsNotEmpty()
   id: number;
@@ -14,8 +14,4 @@ export class CreateSubnetInput {
   @Field()
   @IsNotEmpty()
   subnetName: string;
-
-  @Field()
-  @IsNotEmpty()
-  addressPrefix: string;
 }
