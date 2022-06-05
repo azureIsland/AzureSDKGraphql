@@ -8,20 +8,19 @@ import { Int } from '@nestjs/graphql';
 
 @ArgsType()
 export class secretAggregateArgs {
+  @Field(() => secretWhereInput, { nullable: true })
+  @Type(() => secretWhereInput)
+  where?: secretWhereInput;
 
-    @Field(() => secretWhereInput, {nullable:true})
-    @Type(() => secretWhereInput)
-    where?: secretWhereInput;
+  @Field(() => [secretOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<secretOrderByWithRelationInput>;
 
-    @Field(() => [secretOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<secretOrderByWithRelationInput>;
+  @Field(() => secretWhereUniqueInput, { nullable: true })
+  cursor?: secretWhereUniqueInput;
 
-    @Field(() => secretWhereUniqueInput, {nullable:true})
-    cursor?: secretWhereUniqueInput;
+  @Field(() => Int, { nullable: true })
+  take?: number;
 
-    @Field(() => Int, {nullable:true})
-    take?: number;
-
-    @Field(() => Int, {nullable:true})
-    skip?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
 }

@@ -6,12 +6,11 @@ import { secretWhereUniqueInput } from './secret-where-unique.input';
 
 @ArgsType()
 export class UpdateOnesecretArgs {
+  @Field(() => secretUpdateInput, { nullable: false })
+  @Type(() => secretUpdateInput)
+  data!: secretUpdateInput;
 
-    @Field(() => secretUpdateInput, {nullable:false})
-    @Type(() => secretUpdateInput)
-    data!: secretUpdateInput;
-
-    @Field(() => secretWhereUniqueInput, {nullable:false})
-    @Type(() => secretWhereUniqueInput)
-    where!: secretWhereUniqueInput;
+  @Field(() => secretWhereUniqueInput, { nullable: false })
+  @Type(() => secretWhereUniqueInput)
+  where!: secretWhereUniqueInput;
 }

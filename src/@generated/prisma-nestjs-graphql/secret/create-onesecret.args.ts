@@ -6,10 +6,9 @@ import { ValidateNested } from 'class-validator';
 
 @ArgsType()
 export class CreateOnesecretArgs {
-
-    @Field(() => secretCreateInput, {nullable:false})
-    @Type(() => secretCreateInput)
-    @ValidateNested()
-    @Type(() => secretCreateInput)
-    data!: secretCreateInput;
+  @Field(() => secretCreateInput, { nullable: false })
+  @Type(() => secretCreateInput)
+  @ValidateNested()
+  @Type(() => secretCreateInput)
+  data!: secretCreateInput;
 }
