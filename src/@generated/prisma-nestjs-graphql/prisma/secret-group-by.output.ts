@@ -9,39 +9,40 @@ import { SecretMaxAggregate } from './secret-max-aggregate.output';
 
 @ObjectType()
 export class SecretGroupBy {
-  @Field(() => Int, { nullable: false })
-  id!: number;
 
-  @Field(() => String, { nullable: false })
-  tenantId!: string;
+    @Field(() => Int, {nullable:false})
+    id!: number;
 
-  @Field(() => String, { nullable: false })
-  clientId!: string;
+    @Field(() => String, {nullable:false})
+    tenantId!: string;
 
-  @Field(() => String, { nullable: false })
-  clientSecret!: string;
+    @Field(() => String, {nullable:false})
+    clientId!: string;
 
-  @Field(() => String, { nullable: false })
-  subscriptionId!: string;
+    @Field(() => String, {nullable:false})
+    clientSecret!: string;
 
-  @Field(() => String, { nullable: false })
-  resourceGroup!: string;
+    @Field(() => String, {nullable:false})
+    subscriptionId!: string;
 
-  @Field(() => String, { nullable: false })
-  location!: string;
+    @Field(() => String, {nullable:false})
+    resourceGroup!: string;
 
-  @Field(() => SecretCountAggregate, { nullable: true })
-  _count?: SecretCountAggregate;
+    @Field(() => String, {nullable:false})
+    location!: string;
 
-  @Field(() => SecretAvgAggregate, { nullable: true })
-  _avg?: SecretAvgAggregate;
+    @Field(() => SecretCountAggregate, {nullable:true})
+    _count?: SecretCountAggregate;
 
-  @Field(() => SecretSumAggregate, { nullable: true })
-  _sum?: SecretSumAggregate;
+    @Field(() => SecretAvgAggregate, {nullable:true})
+    _avg?: SecretAvgAggregate;
 
-  @Field(() => SecretMinAggregate, { nullable: true })
-  _min?: SecretMinAggregate;
+    @Field(() => SecretSumAggregate, {nullable:true})
+    _sum?: SecretSumAggregate;
 
-  @Field(() => SecretMaxAggregate, { nullable: true })
-  _max?: SecretMaxAggregate;
+    @Field(() => SecretMinAggregate, {nullable:true})
+    _min?: SecretMinAggregate;
+
+    @Field(() => SecretMaxAggregate, {nullable:true})
+    _max?: SecretMaxAggregate;
 }

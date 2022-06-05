@@ -5,7 +5,8 @@ import { Type } from 'class-transformer';
 
 @ArgsType()
 export class DeleteManysecretArgs {
-  @Field(() => secretWhereInput, { nullable: true })
-  @Type(() => secretWhereInput)
-  where?: secretWhereInput;
+
+    @Field(() => secretWhereInput, {nullable:true})
+    @Type(() => secretWhereInput)
+    where?: secretWhereInput;
 }

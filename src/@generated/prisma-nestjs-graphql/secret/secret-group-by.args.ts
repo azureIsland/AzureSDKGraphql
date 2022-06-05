@@ -9,22 +9,23 @@ import { Int } from '@nestjs/graphql';
 
 @ArgsType()
 export class secretGroupByArgs {
-  @Field(() => secretWhereInput, { nullable: true })
-  @Type(() => secretWhereInput)
-  where?: secretWhereInput;
 
-  @Field(() => [secretOrderByWithAggregationInput], { nullable: true })
-  orderBy?: Array<secretOrderByWithAggregationInput>;
+    @Field(() => secretWhereInput, {nullable:true})
+    @Type(() => secretWhereInput)
+    where?: secretWhereInput;
 
-  @Field(() => [SecretScalarFieldEnum], { nullable: false })
-  by!: Array<keyof typeof SecretScalarFieldEnum>;
+    @Field(() => [secretOrderByWithAggregationInput], {nullable:true})
+    orderBy?: Array<secretOrderByWithAggregationInput>;
 
-  @Field(() => secretScalarWhereWithAggregatesInput, { nullable: true })
-  having?: secretScalarWhereWithAggregatesInput;
+    @Field(() => [SecretScalarFieldEnum], {nullable:false})
+    by!: Array<keyof typeof SecretScalarFieldEnum>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => secretScalarWhereWithAggregatesInput, {nullable:true})
+    having?: secretScalarWhereWithAggregatesInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
+
+    @Field(() => Int, {nullable:true})
+    skip?: number;
 }

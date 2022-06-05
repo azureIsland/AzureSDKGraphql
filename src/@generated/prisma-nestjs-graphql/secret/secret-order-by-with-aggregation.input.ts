@@ -9,39 +9,40 @@ import { secretSumOrderByAggregateInput } from './secret-sum-order-by-aggregate.
 
 @InputType()
 export class secretOrderByWithAggregationInput {
-  @Field(() => SortOrder, { nullable: true })
-  id?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  tenantId?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    id?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  clientId?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    tenantId?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  clientSecret?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    clientId?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  subscriptionId?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    clientSecret?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  resourceGroup?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    subscriptionId?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  location?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    resourceGroup?: keyof typeof SortOrder;
 
-  @Field(() => secretCountOrderByAggregateInput, { nullable: true })
-  _count?: secretCountOrderByAggregateInput;
+    @Field(() => SortOrder, {nullable:true})
+    location?: keyof typeof SortOrder;
 
-  @Field(() => secretAvgOrderByAggregateInput, { nullable: true })
-  _avg?: secretAvgOrderByAggregateInput;
+    @Field(() => secretCountOrderByAggregateInput, {nullable:true})
+    _count?: secretCountOrderByAggregateInput;
 
-  @Field(() => secretMaxOrderByAggregateInput, { nullable: true })
-  _max?: secretMaxOrderByAggregateInput;
+    @Field(() => secretAvgOrderByAggregateInput, {nullable:true})
+    _avg?: secretAvgOrderByAggregateInput;
 
-  @Field(() => secretMinOrderByAggregateInput, { nullable: true })
-  _min?: secretMinOrderByAggregateInput;
+    @Field(() => secretMaxOrderByAggregateInput, {nullable:true})
+    _max?: secretMaxOrderByAggregateInput;
 
-  @Field(() => secretSumOrderByAggregateInput, { nullable: true })
-  _sum?: secretSumOrderByAggregateInput;
+    @Field(() => secretMinOrderByAggregateInput, {nullable:true})
+    _min?: secretMinOrderByAggregateInput;
+
+    @Field(() => secretSumOrderByAggregateInput, {nullable:true})
+    _sum?: secretSumOrderByAggregateInput;
 }

@@ -8,18 +8,19 @@ import { SecretMaxAggregate } from './secret-max-aggregate.output';
 
 @ObjectType()
 export class AggregateSecret {
-  @Field(() => SecretCountAggregate, { nullable: true })
-  _count?: SecretCountAggregate;
 
-  @Field(() => SecretAvgAggregate, { nullable: true })
-  _avg?: SecretAvgAggregate;
+    @Field(() => SecretCountAggregate, {nullable:true})
+    _count?: SecretCountAggregate;
 
-  @Field(() => SecretSumAggregate, { nullable: true })
-  _sum?: SecretSumAggregate;
+    @Field(() => SecretAvgAggregate, {nullable:true})
+    _avg?: SecretAvgAggregate;
 
-  @Field(() => SecretMinAggregate, { nullable: true })
-  _min?: SecretMinAggregate;
+    @Field(() => SecretSumAggregate, {nullable:true})
+    _sum?: SecretSumAggregate;
 
-  @Field(() => SecretMaxAggregate, { nullable: true })
-  _max?: SecretMaxAggregate;
+    @Field(() => SecretMinAggregate, {nullable:true})
+    _min?: SecretMinAggregate;
+
+    @Field(() => SecretMaxAggregate, {nullable:true})
+    _max?: SecretMaxAggregate;
 }
