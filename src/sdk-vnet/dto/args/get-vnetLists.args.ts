@@ -5,5 +5,5 @@ import { IsNotEmpty } from 'class-validator';
 export class GetVNetListsArgs {
   @Field()
   @IsNotEmpty()
-  id: umber;
+  id: Number;
 }
