@@ -29,7 +29,6 @@ export class SdkVNetService {
     for await (const item of virtualNetworksLists) {
       networks.push(item);
     }
-    console.log(networks);
     return networks;
   }
 
@@ -82,7 +81,6 @@ export class SdkVNetService {
         args.networkName,
         parameter,
       );
-    console.log(virtualNetworks_create_info);
     return virtualNetworks_create_info;
   }
 }
