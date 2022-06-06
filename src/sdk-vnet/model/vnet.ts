@@ -1,6 +1,7 @@
 import { Subnet, VirtualNetwork } from '@azure/arm-network';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { SubNet } from 'src/sdk-subnet/model/subnet';
+import { SubNets } from 'src/sdk-subnets/model/subnets';
+import { AddressPrefixes } from './addressPrefixes';
 
 @ObjectType()
 export class VNet implements VirtualNetwork {
@@ -22,7 +23,10 @@ export class VNet implements VirtualNetwork {
   @Field()
   etag: string;
 
-  @Field(() => [SubNet])
+  @Field()
+  addressSpace: AddressPrefixes;
+
+  @Field(() => [SubNets])
   subnets?: Subnet[];
 
   @Field()

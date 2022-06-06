@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class SDKStatus {
+export class CreatedStatus {
   @Field()
   status: string;
 }

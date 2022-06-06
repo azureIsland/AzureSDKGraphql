@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class Test {
+export class NetworkInterface {
   @Field()
-  Id: string;
+  id: string;
 }

@@ -1,7 +1,9 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { GetNetworkSecurityGroupArgs } from './dto/args/get-networkSecurityGroup.args';
+import { CreatedStatus } from 'src/sdk-modelShare/createdStatus';
+import { GetNetworkSecurityGroupAllArgs } from './dto/args/get-networkSecurityGroupAll.args';
+import { GetNetworkSecurityGroupFindOneArgs } from './dto/args/get-networkSecurityGroupFindOne.args';
 import { CreateNetworkSecurityGroupInput } from './dto/input/create-networkSecurityGroup.input';
-import { Test } from './model/test';
+import { NetworkSecurityGroup } from './model/networkSecurityGroup';
 import { SdkNetworkSecurityGroupService } from './sdk-network-security-group.service';
 
 @Resolver()
@@ -10,12 +12,21 @@ export class SdkNetworkSecurityGroupResolver {
     private readonly sdkNetworkSecurityGroup: SdkNetworkSecurityGroupService,
   ) {}
 
-  @Query(() => [Test], { name: 'findAllNSG' })
-  async listNetworkSecurityGroup(@Args() args: GetNetworkSecurityGroupArgs) {
-    return this.sdkNetworkSecurityGroup.listsNetworkSecurityGroup(args);
+  @Query(() => [NetworkSecurityGroup], { name: 'findAllNSG' })
+  async getNetworkSecurityGroupAll(
+    @Args() args: GetNetworkSecurityGroupAllArgs,
+  ) {
+    return this.sdkNetworkSecurityGroup.getNetworkSecurityGroupAll(args);
   }
 
-  @Mutation(() => Test, { name: 'createNSG' })
+  @Query(() => NetworkSecurityGroup, { name: 'findOneNSG' })
+  async getNetworkSecurityGroupOne(
+    @Args() args: GetNetworkSecurityGroupFindOneArgs,
+  ) {
+    return this.sdkNetworkSecurityGroup.getNetworkSecurityGroupFindOne(args);
+  }
+
+  @Mutation(() => CreatedStatus, { name: 'createNSG' })
   async createNetworkSecurityGroup(
     @Args('createNSG') args: CreateNetworkSecurityGroupInput,
   ) {
