@@ -1,26 +1,29 @@
-import { NetworkManagementClient } from '@azure/arm-network';
+import {
+  NetworkManagementClient,
+  NetworkSecurityGroup,
+} from '@azure/arm-network';
 import { ClientSecretCredential } from '@azure/identity';
 import { Injectable } from '@nestjs/common';
 import { SdkSecretService } from 'src/sdk-secret/sdk-secret.service';
-import { GetNetworkSecurityGroupArgs } from './dto/args/get-networkSecurityGroup.args';
+import { GetNetworkSecurityGroupAllArgs } from './dto/args/get-networkSecurityGroupAll.args';
+import { GetNetworkSecurityGroupFindOneArgs } from './dto/args/get-networkSecurityGroupFindOne.args';
 import { CreateNetworkSecurityGroupInput } from './dto/input/create-networkSecurityGroup.input';
 
 @Injectable()
 export class SdkNetworkSecurityGroupService {
   constructor(private readonly sdkSecretService: SdkSecretService) {}
 
-  async listsNetworkSecurityGroup(
-    getNetworkSecurityGroupArgs: GetNetworkSecurityGroupArgs,
-  ) {
+  // NSGの全取得
+  async getNetworkSecurityGroupAll(args: GetNetworkSecurityGroupAllArgs) {
     const secret = await this.sdkSecretService.findFirst({
       where: {
         id: {
-          equals: getNetworkSecurityGroupArgs.id,
+          equals: args.id,
         },
       },
     });
 
-    const network_client = new NetworkManagementClient(
+    const networkClient = new NetworkManagementClient(
       new ClientSecretCredential(
         secret.tenantId,
         secret.clientId,
@@ -29,13 +32,44 @@ export class SdkNetworkSecurityGroupService {
       secret.subscriptionId,
     );
 
-    const securityGroups = network_client.networkSecurityGroups.listAll();
-    console.log(securityGroups);
-    for await (const item of securityGroups) {
-      console.log(item);
+    const securityGroupsLists = networkClient.networkSecurityGroups.listAll();
+    const securityGroups: NetworkSecurityGroup[] = [];
+    for await (const item of securityGroupsLists) {
+      securityGroups.push(item);
     }
+    return securityGroups;
   }
 
+  // NSGの単体取得
+  async getNetworkSecurityGroupFindOne(
+    args: GetNetworkSecurityGroupFindOneArgs,
+  ) {
+    const secret = await this.sdkSecretService.findFirst({
+      where: {
+        id: {
+          equals: args.id,
+        },
+      },
+    });
+
+    const networkClient = new NetworkManagementClient(
+      new ClientSecretCredential(
+        secret.tenantId,
+        secret.clientId,
+        secret.clientSecret,
+      ),
+      secret.subscriptionId,
+    );
+
+    const networkSecurityGroup = await networkClient.networkSecurityGroups.get(
+      secret.resourceGroup,
+      args.networkSecurityGroupName,
+    );
+
+    return networkSecurityGroup;
+  }
+
+  // NSGの作成
   async createNetworkSecurityGroup(
     createNSGInput: CreateNetworkSecurityGroupInput,
   ) {
@@ -47,7 +81,7 @@ export class SdkNetworkSecurityGroupService {
       },
     });
 
-    const network_client = new NetworkManagementClient(
+    const networkClient = new NetworkManagementClient(
       new ClientSecretCredential(
         secret.tenantId,
         secret.clientId,
@@ -57,7 +91,7 @@ export class SdkNetworkSecurityGroupService {
     );
 
     const newSecurityGroup =
-      await network_client.networkSecurityGroups.beginCreateOrUpdateAndWait(
+      await networkClient.networkSecurityGroups.beginCreateOrUpdateAndWait(
         secret.resourceGroup,
         createNSGInput.networkSecurityGroupName,
         {
