@@ -134,6 +134,6 @@ export class SdkNetworkSecurityGroupService {
           ],
         },
       );
-    console.log(newSecurityGroup);
+    return newSecurityGroup;
   }
 }

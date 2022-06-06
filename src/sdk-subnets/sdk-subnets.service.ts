@@ -82,6 +82,6 @@ export class SdkSubnetsService {
         addressPrefix: args.addressPrefix,
       },
     );
-    console.log(subNet);
+    return subNet;
   }
 }
