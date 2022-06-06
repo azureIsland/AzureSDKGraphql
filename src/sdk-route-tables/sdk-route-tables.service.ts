@@ -72,12 +72,6 @@ export class SdkRouteTablesService {
 
     const routes: Route[] = args.routes;
 
-    // const subnets: Subnet[] = [
-    //   {
-
-    //   }
-    // ]
-
     const routeTable =
       await networkClient.routeTables.beginCreateOrUpdateAndWait(
         secret.resourceGroup,

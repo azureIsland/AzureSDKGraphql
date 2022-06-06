@@ -56,6 +56,7 @@ export class SdkSubnetsService {
       args.virtualNetworkName,
       args.subnetName,
     );
+    console.log(subnet);
     return subnet;
   }
 
