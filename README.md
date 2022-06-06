@@ -1,73 +1,102 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# AzureSDKGraphQL
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 開発を始める前に
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+以下の vscode の拡張機能をインストールしてください。
 
-## Description
+- [ESlint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ npm install
+### 必要パッケージのインストール 
+```console
+yarn
 ```
 
-## Running the app
+初回は時間かかります。
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+### DBの準備（SQLite3）
+```console
+yarn prisma migrate dev
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+#### DB内の確認
+```console
+yarn prisma studio
 ```
 
-## Support
+## 操作可能なAzureリソース
+### 取得
+- VNetの全体取得・単体取得
+- VNetに紐づくサブネットの取得・単体取得
+- ルートテーブルの全体取得・単体取得
+- NetworkSecurityGroupの全体取得・単体取得
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### 作成・更新
+- VNetの作成・更新
+- サブネットの作成・更新
+- ルートテーブルの作成・更新
+- NetworkSecurityGroupの作成・更新
 
-## Stay in touch
+## 開発サーバの立て方・使い方
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+9000 と 5555 番ポートを使います。空けといてください。
 
-## License
+### GraphQLプレイグラウンド
+```
+# ブラウザで確認
+http://localhost:9000/graphql
+```
 
-Nest is [MIT licensed](LICENSE).
+### SecretテーブルにAzureリソースを操作するためのキーの登録
+詳細はGraphQL内のDOCSを確認してください。
+
+#### 登録
+**Azureリソースを操作するためにこの操作が必要になります。**
+登録後取得できるIDを使う必要があります。
+キーについては各チームのインフラ担当・リーダーに聞いてください。
+
+```graphql
+mutation {
+  createSecret(data:{
+    clientId:"xxxxxxxx",
+    tenantId:"xxxxxxxx",
+    clientSecret: "xxxxxxxx",
+    subscriptionId: "xxxxxxxx",
+    resourceGroup: "xxxxxxxx",
+    location: "xxxxxxxx"
+  }) {
+    id
+    clientId
+    tenantId
+    clientSecret
+    subscriptionId
+    resourceGroup
+    location
+  }
+}
+```
+
+#### 取得
+```graphql
+query {
+  findOneSecret(where:{
+    id: {
+      equals:1
+    }
+  }) {
+    id
+    clientId
+    tenantId
+    clientSecret
+    subscriptionId
+    location
+    resourceGroup
+  }
+}
+```
+
+## 開発環境
+- 言語：TypeScript
+- フレームワーク：NestJS
+- ORM：Prisma
+- API：GraphQL
