@@ -2,6 +2,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GetVNetFindOneArgs } from './dto/args/get-vnetFindOne.args';
 import { GetVNetAllArgs } from './dto/args/get-vnetListsAll.args';
 import { CreateVNetInput } from './dto/input/create-vnet.intput';
+import { CreatedVNetStatus } from './model/createdVNetStatus';
 import { VNet } from './model/vnet';
 import { SdkVNetService } from './sdk-vnet.service';
 
@@ -19,7 +20,7 @@ export class SdkVNetResolver {
     return this.sdkVNetService.getVNetsFindOne(args);
   }
 
-  @Mutation(() => VNet)
+  @Mutation(() => CreatedVNetStatus)
   async createVNet(@Args('createVNets') args: CreateVNetInput) {
     return this.sdkVNetService.createVNet(args);
   }

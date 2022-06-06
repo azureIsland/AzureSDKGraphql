@@ -1,9 +1,9 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { CreatedStatus } from 'src/sdk-modelShare/createdStatus';
 import { GetNetworkSecurityGroupAllArgs } from './dto/args/get-networkSecurityGroupAll.args';
 import { GetNetworkSecurityGroupFindOneArgs } from './dto/args/get-networkSecurityGroupFindOne.args';
 import { CreateNetworkSecurityGroupInput } from './dto/input/create-networkSecurityGroup.input';
 import { NetworkSecurityGroup } from './model/networkSecurityGroup';
-import { Test } from './model/test';
 import { SdkNetworkSecurityGroupService } from './sdk-network-security-group.service';
 
 @Resolver()
@@ -26,7 +26,7 @@ export class SdkNetworkSecurityGroupResolver {
     return this.sdkNetworkSecurityGroup.getNetworkSecurityGroupFindOne(args);
   }
 
-  @Mutation(() => Test, { name: 'createNSG' })
+  @Mutation(() => CreatedStatus, { name: 'createNSG' })
   async createNetworkSecurityGroup(
     @Args('createNSG') args: CreateNetworkSecurityGroupInput,
   ) {

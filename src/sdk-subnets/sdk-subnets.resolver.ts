@@ -1,8 +1,8 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Test } from 'src/sdk-network-security-group/model/test';
 import { GetVNetRelationSubnetsAllArgs } from './dto/args/get-subnetsAll.args';
 import { GetSubnetFindOneArgs } from './dto/args/get-subnetsFindOne.args';
 import { CreateSubnetsInput } from './dto/input/create-subnets.input';
+import { CreatedSubnetStatus } from './model/createdSubnetStatus';
 import { SubNets } from './model/subnets';
 import { SdkSubnetsService } from './sdk-subnets.service';
 
@@ -20,7 +20,7 @@ export class SdkSubnetsResolver {
     return this.sdkSubNetsService.getSubNetFindOne(args);
   }
 
-  @Mutation(() => Test, { name: 'createSubnet' })
+  @Mutation(() => CreatedSubnetStatus, { name: 'createSubnet' })
   async createSubnet(@Args('createSubnet') args: CreateSubnetsInput) {
     return this.sdkSubNetsService.createSubnet(args);
   }
