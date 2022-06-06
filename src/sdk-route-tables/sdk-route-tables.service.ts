@@ -70,19 +70,7 @@ export class SdkRouteTablesService {
       secret.subscriptionId,
     );
 
-    const routes: Route[] = [
-      {
-        name: 'aaaaa',
-        addressPrefix: '10.0.0.0/24',
-        nextHopType: 'VnetLocal',
-      },
-    ];
-
-    // const subnets: Subnet[] = [
-    //   {
-
-    //   }
-    // ]
+    const routes: Route[] = args.routes;
 
     const routeTable =
       await networkClient.routeTables.beginCreateOrUpdateAndWait(
