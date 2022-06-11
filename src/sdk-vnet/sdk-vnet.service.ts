@@ -2,6 +2,7 @@ import { NetworkManagementClient, VirtualNetwork } from '@azure/arm-network';
 import { ClientSecretCredential } from '@azure/identity';
 import { Injectable } from '@nestjs/common';
 import { SdkSecretService } from 'src/sdk-secret/sdk-secret.service';
+import { DeleteVNetArgs } from './dto/args/delete-vnet.args';
 import { GetVNetFindOneArgs } from './dto/args/get-vnetFindOne.args';
 import { GetVNetAllArgs } from './dto/args/get-vnetListsAll.args';
 import { CreateVNetInput } from './dto/input/create-vnet.intput';
@@ -82,5 +83,25 @@ export class SdkVNetService {
         parameter,
       );
     return virtualNetworks_create_info;
+  }
+
+  async deleteVNet(args: DeleteVNetArgs) {
+    const secret = await this.sdkSecretService.findFirst({
+      where: { id: { equals: args.id } },
+    });
+
+    const networkClient = new NetworkManagementClient(
+      new ClientSecretCredential(
+        secret.tenantId,
+        secret.clientId,
+        secret.clientSecret,
+      ),
+      secret.subscriptionId,
+    );
+
+    await networkClient.virtualNetworks.beginDeleteAndWait(
+      secret.resourceGroup,
+      args.virtualNetworkName,
+    );
   }
 }

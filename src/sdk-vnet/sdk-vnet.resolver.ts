@@ -1,4 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { DeleteVNetArgs } from './dto/args/delete-vnet.args';
 import { GetVNetFindOneArgs } from './dto/args/get-vnetFindOne.args';
 import { GetVNetAllArgs } from './dto/args/get-vnetListsAll.args';
 import { CreateVNetInput } from './dto/input/create-vnet.intput';
@@ -23,5 +24,10 @@ export class SdkVNetResolver {
   @Mutation(() => CreatedVNetStatus)
   async createVNet(@Args('createVNets') args: CreateVNetInput) {
     return this.sdkVNetService.createVNet(args);
+  }
+
+  @Mutation(() => VNet, { name: 'deleteVNets' })
+  async deleteVNet(@Args('deleteVNets') args: DeleteVNetArgs) {
+    return this.sdkVNetService.deleteVNet(args);
   }
 }
