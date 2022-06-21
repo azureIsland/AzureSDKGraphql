@@ -7,6 +7,9 @@ import { SdkNetworkSecurityGroupModule } from './sdk-network-security-group/sdk-
 import { SdkRouteTablesModule } from './sdk-route-tables/sdk-route-tables.module';
 import { SdkSecretModule } from './sdk-secret/sdk-secret.module';
 import { PrismaService } from './prisma.service';
+import { SdkVmModule } from './sdk-vm/sdk-vm.module';
+import { SdkNetworkInterfaceModule } from './sdk-network-interface/sdk-network-interface.module';
+import { SdkCollectModule } from './sdk-collect/sdk-collect.module';
 
 @Module({
   imports: [
@@ -19,6 +22,9 @@ import { PrismaService } from './prisma.service';
     SdkNetworkSecurityGroupModule,
     SdkRouteTablesModule,
     SdkSecretModule,
+    SdkVmModule,
+    SdkNetworkInterfaceModule,
+    SdkCollectModule,
   ],
   providers: [PrismaService],
 })
